@@ -1,0 +1,27 @@
+# Cross-Origin Resource Sharing の対応
+
+Express では CORS に対応するため cors というライブラリが用意されている。（そのまんま。）  
+設定値に関しては[こちら](https://github.com/expressjs/cors) を参考に。
+
+## 実装
+
+```
+const express = require('express');
+const cors = require('cors');
+const app = express();
+
+const corsOptions = {
+  "origin": "http://hogehoge.com",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+};
+
+app.get('/hoge', cors(corsOptions), (req, res) => {
+  res.send('fuga');
+});
+
+app.listen(3000, () => {
+  console.log('server start ... localhost:3000');
+});
+```
